@@ -1,0 +1,162 @@
+
+#=======================================
+#  Field PIN_FLD_NAME
+#=======================================
+
+STRING PIN_FLD_NAME {
+
+	ID = 17;
+}
+
+
+#=======================================
+#  Field PIN_FLD_CLASS_NAME
+#=======================================
+
+STRING PIN_FLD_CLASS_NAME {
+
+	ID = 111111;
+}
+
+
+#=======================================
+#  Field PIN_FLD_TYPE
+#=======================================
+
+ENUM PIN_FLD_TYPE {
+
+	ID = 53;
+}
+
+
+#=======================================
+#  Field PIN_FLD_DEFAULT_VALUE
+#=======================================
+
+STRING PIN_FLD_DEFAULT_VALUE {
+
+	ID = 111112;
+}
+
+
+#=======================================
+#  Field PIN_FLD_DELETED
+#=======================================
+
+INT PIN_FLD_DELETED {
+
+	ID = 111113;
+}
+
+#=======================================
+#  Storable Class /metafield
+#=======================================
+
+STORABLE CLASS /metafield {
+
+	SEQ_START = "1";
+	READ_ACCESS = "Global";
+	WRITE_ACCESS = "Global";
+	DESCR = "metafield summarizes basic information about data, which can make finding and working with particular instances of data easier.";
+	IS_PARTITIONED = "0";
+
+	#===================
+	#  Fields 
+	#===================
+
+	STRING PIN_FLD_NAME {
+
+		DESCR = "The Name Of Metafield.";
+		ORDER = 0;
+		LENGTH = 60;
+		CREATE = Required;
+		MODIFY = Writeable;
+		AUDITABLE = 0;
+		ENCRYPTABLE = 0;
+		SERIALIZABLE = 0;
+	}
+
+	STRING PIN_FLD_CLASS_NAME {
+
+		DESCR = "Name of the storable class to which it can be linked..";
+		ORDER = 0;
+		LENGTH = 60;
+		CREATE = Required;
+		MODIFY = Writeable;
+		AUDITABLE = 0;
+		ENCRYPTABLE = 0;
+		SERIALIZABLE = 0;
+	}
+
+	ENUM PIN_FLD_TYPE {
+
+		DESCR = "Data type of metafield. Could be any of BRM supported data type.";
+		ORDER = 0;
+		CREATE = Required;
+		MODIFY = Writeable;
+		AUDITABLE = 0;
+		ENCRYPTABLE = 0;
+		SERIALIZABLE = 0;
+	}
+
+	STRING PIN_FLD_DEFAULT_VALUE {
+
+		DESCR = "Default value type.";
+		ORDER = 0;
+		LENGTH = 60;
+		CREATE = Optional;
+		MODIFY = Writeable;
+		AUDITABLE = 0;
+		ENCRYPTABLE = 0;
+		SERIALIZABLE = 0;
+	}
+
+	INT PIN_FLD_DELETED {
+
+		DESCR = "Status of the field.";
+		ORDER = 0;
+		CREATE = Optional;
+		MODIFY = Writeable;
+		AUDITABLE = 0;
+		ENCRYPTABLE = 0;
+		SERIALIZABLE = 0;
+	}
+
+}
+#=======================================
+#  Storable Class /metafield
+#=======================================
+
+STORABLE CLASS /metafield IMPLEMENTATION ORACLE7 {
+
+	SQL_TABLE = "metafield_t";
+
+	#===================
+	#  Fields 
+	#===================
+
+	STRING PIN_FLD_NAME {
+
+		SQL_COLUMN = "name";
+	}
+
+	STRING PIN_FLD_CLASS_NAME {
+
+		SQL_COLUMN = "class_name";
+	}
+
+	ENUM PIN_FLD_TYPE {
+
+		SQL_COLUMN = "type";
+	}
+
+	STRING PIN_FLD_DEFAULT_VALUE {
+
+		SQL_COLUMN = "default_value";
+	}
+
+	INT PIN_FLD_DELETED {
+
+		SQL_COLUMN = "deleted";
+	}
+}

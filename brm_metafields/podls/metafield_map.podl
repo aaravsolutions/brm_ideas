@@ -1,0 +1,186 @@
+
+#=======================================
+#  Field PIN_FLD_METAFIELD_OBJ
+#=======================================
+
+POID  PIN_FLD_METAFIELD_OBJ {
+
+	ID = 111114;
+}
+
+
+#=======================================
+#  Field PIN_FLD_STR_VALUE
+#=======================================
+
+STRING PIN_FLD_STR_VALUE {
+
+	ID = 111115;
+}
+
+
+#=======================================
+#  Field PIN_FLD_INT_VALUE
+#=======================================
+
+INT PIN_FLD_INT_VALUE {
+
+	ID = 111116;
+}
+
+
+#=======================================
+#  Field PIN_FLD_DEC_VALUE
+#=======================================
+
+DECIMAL PIN_FLD_DEC_VALUE {
+
+	ID = 111117;
+}
+
+
+#=======================================
+#  Field PIN_FLD_OBJ
+#=======================================
+
+POID PIN_FLD_OBJ {
+
+        ID = 111118;
+}
+
+
+#=======================================
+#  Field PIN_FLD_DELETED
+#=======================================
+
+INT PIN_FLD_DELETED {
+
+	ID = 111113;
+}
+
+#=======================================
+#  Storable Class /metafield_map
+#=======================================
+
+STORABLE CLASS /metafield_map {
+
+	SEQ_START = "1";
+	READ_ACCESS = "Global";
+	WRITE_ACCESS = "Global";
+	DESCR = "metafield summarizes basic information about data, which can make finding and working with particular instances of data easier.";
+	IS_PARTITIONED = "0";
+
+	#===================
+	#  Fields 
+	#===================
+
+	POID PIN_FLD_METAFIELD_OBJ {
+
+		DESCR = "The POID Of Metafield.";
+		ORDER = 0;
+		CREATE = Required;
+		MODIFY = Writeable;
+		AUDITABLE = 0;
+		ENCRYPTABLE = 0;
+		SERIALIZABLE = 0;
+	}
+
+	STRING PIN_FLD_STR_VALUE {
+
+		DESCR = "String Value.";
+		ORDER = 0;
+		LENGTH = 60;
+		CREATE = Required;
+		MODIFY = Writeable;
+		AUDITABLE = 0;
+		ENCRYPTABLE = 0;
+		SERIALIZABLE = 0;
+	}
+
+	INT PIN_FLD_INT_VALUE {
+
+		DESCR = "INT VALUE.";
+		ORDER = 0;
+		CREATE = Required;
+		MODIFY = Writeable;
+		AUDITABLE = 0;
+		ENCRYPTABLE = 0;
+		SERIALIZABLE = 0;
+	}
+
+	DECIMAL PIN_FLD_DEC_VALUE {
+
+		DESCR = "Decimal value.";
+		ORDER = 0;
+		CREATE = Required;
+		MODIFY = Writeable;
+		AUDITABLE = 0;
+		ENCRYPTABLE = 0;
+		SERIALIZABLE = 0;
+	}
+
+	POID PIN_FLD_OBJ {
+
+                DESCR = "Class object poid to which this fld is linked.";
+                ORDER = 0;
+                CREATE = Required;
+                MODIFY = Writeable;
+                AUDITABLE = 0;
+                ENCRYPTABLE = 0;
+                SERIALIZABLE = 0;
+	}
+
+	INT PIN_FLD_DELETED {
+
+		DESCR = "Status of the field.";
+		ORDER = 0;
+		CREATE = Optional;
+		MODIFY = Writeable;
+		AUDITABLE = 0;
+		ENCRYPTABLE = 0;
+		SERIALIZABLE = 0;
+	}
+
+}
+#=======================================
+#  Storable Class /metafield_map
+#=======================================
+
+STORABLE CLASS /metafield_map IMPLEMENTATION ORACLE7 {
+
+	SQL_TABLE = "metafield_map_t";
+
+	#===================
+	#  Fields 
+	#===================
+
+	POID PIN_FLD_METAFIELD_OBJ {
+
+		SQL_COLUMN = "metafield_obj";
+	}
+
+	STRING PIN_FLD_STR_VALUE {
+
+		SQL_COLUMN = "str_value";
+	}
+
+	INT PIN_FLD_INT_VALUE {
+
+		SQL_COLUMN = "int_value";
+	}
+
+	DECIMAL PIN_FLD_DEC_VALUE {
+
+		SQL_COLUMN = "dec_value";
+	}
+
+	POID PIN_FLD_OBJ {
+		
+		SQL_COLUMN = "obj";
+	}
+
+	INT PIN_FLD_DELETED {
+
+		SQL_COLUMN = "deleted";
+	}
+}
