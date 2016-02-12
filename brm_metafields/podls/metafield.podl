@@ -1,3 +1,11 @@
+#=======================================
+#  Field PIN_FLD_ACCOUNT_OBJ
+#=======================================
+
+POID  PIN_FLD_ACCOUNT_OBJ {
+
+        ID = 40;
+	}
 
 #=======================================
 #  Field PIN_FLD_NAME
@@ -63,6 +71,17 @@ STORABLE CLASS /metafield {
 	#===================
 	#  Fields 
 	#===================
+
+	 POID PIN_FLD_ACCOUNT_OBJ {
+     
+     		DESCR = "The POID Of Account.";
+		ORDER = 0;
+		CREATE = Required;
+		MODIFY = Writeable; 
+		AUDITABLE = 0;
+		ENCRYPTABLE = 0;
+		SERIALIZABLE = 0;
+		}
 
 	STRING PIN_FLD_NAME {
 
@@ -134,6 +153,12 @@ STORABLE CLASS /metafield IMPLEMENTATION ORACLE7 {
 	#===================
 	#  Fields 
 	#===================
+
+	POID PIN_FLD_ACCOUNT_OBJ {
+
+         SQL_COLUMN = "account_obj";
+	 }
+
 
 	STRING PIN_FLD_NAME {
 
