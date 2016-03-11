@@ -1,0 +1,76 @@
+######################################################################
+#
+#      Copyright 2000-2009 Oracle.
+#
+#      This material is the exclusive property and trade secret of
+#      Oracle Corporation. No part may be reproduced,
+#      disclosed, stored in a retrieval system, or otherwise
+#      transmitted in any form or by any means, electronic,
+#      mechanical, photocopying, optical, magnetic, chemical,
+#      biological, or otherwise, without prior written permission
+#      of Oracle.
+#
+######################################################################
+
+
+# This file defines macros used by nmake to build Infranet
+# source samples on Unix. This file should be included by all
+# Unix makefiles. 
+# 
+# IMPORTANT: Make sure env.unix file is included in Unix makefiles 
+# before this file!!!
+
+OS=linux
+
+JAVAC_hpux = $(JDK_HOME)/bin/javac
+JAVAC_hpux_ia64 = $(JDK_HOME)/bin/javac
+JAVAC_solaris = $(JDK_HOME)/bin/javac
+JAVAC_linux = $(JDK_HOME)/bin/javac
+JAVAC_aix = $(JDK_HOME)/bin/javac
+#the sh directory is there in JDK_HOME on AIX
+
+JAVAC = $(JAVAC_$(OS))
+
+CLASSPATH_aix=$(JDK_HOME)/bin:$(JDK_HOME)/lib:$(JDK_HOME)/jre/bin/classic
+CLASSPATH=$(PCM_JAR):$(PCMEXT_JAR):$(CLASSPATH_$(OS))
+
+CFLAGS_solaris = -g -xcg92
+CFLAGS_linux = -m32 -fPIC
+CFLAGS_hpux = -g -Ae +Z
+CFLAGS_hpux_ia64 = -g -Ae +Z
+CFLAGS_aix = -g -D rs6000 -D __aix -D unix -D __unix -DPIN_USE_ANSI_HDRS -qchars=signed
+CFLAGS = $(CFLAGS_$(OS)) -I$(INCDIR)
+
+CPPFLAGS_solaris = -g -xcg92 
+CPPFLAGS_linux = -m32 -fPIC
+CPPFLAGS_hpux = -g -AA
+CPPFLAGS_hpux_ia64 = -g -AA
+CPPFLAGS_aix = -g -Drs6000 -D__aix -Dunix -D__unix -qchars=signed -qrtti=all -I$(RW_INCDIR)/ansi
+CPPFLAGS = $(CPPFLAGS_$(OS)) -I$(INCDIR) -I$(RW_INCDIR) -D_RWCONFIG_12d
+
+
+LDFLAGS_solaris= -R:$(LIBDIR): 
+LDFLAGS_linux= -shared
+LDFLAGS_hpux= -Wl,-E -Wl,+b:$(LIBDIR):
+LDFLAGS_hpux_ia64= -lCsup -lm -lcl -ldld -Wl,-E -Wl,+b:$(LIBDIR):
+LDFLAGS = -L$(LIBDIR) $(LDFLAGS_$(OS))
+
+OS_LIBS_solaris= -lsocket -lnsl -lgen -library=%none
+OS_LIBS_hpux= -lsec -lCsup
+OS_LIBS_hpux_ia64= -lsec -lCsup -lunwind
+OS_LIBS_aix= -brtl 
+
+LDLIBS= -lportal $(OS_LIBS_$(OS))
+CPPLDLIBS= $(LDLIBS) -lstd4112d -lpcmcpp60
+
+INCFILES= $(INCDIR)/pcm.h \
+	$(INCDIR)/pin_bill.h $(INCDIR)/pin_cust.h $(INCDIR)/pin_act.h \
+	$(INCDIR)/pin_errs.h $(INCDIR)/pinlog.h
+
+CC_solaris= CC
+CC_linux= gcc
+CC_hpux= aCC
+CC_hpux_ia64= aCC
+CC_aix= xlCcore_r
+CPP=$(CC_$(OS))
+CC=$(CC_$(OS))
