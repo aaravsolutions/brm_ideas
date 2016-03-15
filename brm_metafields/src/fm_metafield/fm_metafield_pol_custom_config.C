@@ -18,6 +18,7 @@ static  char Sccs_Id[] = "@(#)$Id: fm_metafield_pol_custom_config.c /cgbubrm_mai
 #include "pcm.h"
 #include "cm_fm.h"
 #include "ops/custom_opcode.h"
+#include "ops/newpri1.h"
 
 PIN_EXPORT void * fm_metafield_pol_custom_config_func();
 
@@ -33,6 +34,8 @@ struct cm_fm_config fm_metafield_pol_custom_config[]={
          *****************************************************************************/
 
 	{ PCM_OP_CREATE_METAFIELD,		"op_create_metafield"},
+        { PCM_OP_GET_METAFIELD,                 "op_get_meta_field"},
+	{ PCM_OP_MODIFY_METAFIELD,              "op_modify_meta_field"},
 	{ 0,	(char *)0 }
 };
 

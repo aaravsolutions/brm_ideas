@@ -56,16 +56,20 @@ SL_EXT= $(SL_EXT_$(OS))
 ##########
 
 INCFILES= $(INCDIR)/pin_cust.h $(INCDIR)/pcm.h \
-	$(INCDIR)/pin_errs.h $(INCDIR)/pinlog.h
+	$(INCDIR)/pin_errs.h $(INCDIR)/pinlog.h \
+	$(INCDIR)/ops/newpri1.h
 
 #
 FILES= fm_metafield_pol_config.c \
-	fm_metafield_pol_create_metafield_obj.c
+	fm_metafield_pol_create_metafield_obj.c \
+	fm_metafield_pol_get_metafield.c \
+	fm_metafield_pol_modify_metafield.c
 
 
 OBJECTS= fm_metafield_pol_config.o \
-	fm_metafield_pol_create_metafield_obj.o
-
+	fm_metafield_pol_create_metafield_obj.o \
+	fm_metafield_pol_get_metafield.o \
+	fm_metafield_pol_modify_metafield.o
 
 #
 
