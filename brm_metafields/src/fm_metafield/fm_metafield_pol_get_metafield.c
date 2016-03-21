@@ -158,21 +158,28 @@ fm_get_meta_field(
         void            *vp = NULL;
         pin_decimal_t   *zero_decimal =  pin_decimal("0.0", ebufp);
 	pin_flist_t	*r_flistp = NULL;
-
+	int 		   count =0;
         if (PIN_ERR_IS_ERR(ebufp)) {
                 return;
         }
         PIN_ERR_CLEAR_ERR(ebufp);
 
-       bi_pdp = PIN_FLIST_FLD_GET(in_flistp, PIN_FLD_POID, 0, ebufp );
- 
-			   
-			
 
+
+	//Count FIELDS array 
+	count = PIN_FLIST_ELEM_COUNT(in_flistp,PIN_FLD_VALUES,ebufp); 
+			   
+	if (count==0)
+		return;
+	
+
+	else if (count >0)
+	{
 
  /*********************************************************
          * Create the search flist to search in the item objects
          *********************************************************/
+	bi_pdp = PIN_FLIST_FLD_GET(in_flistp, PIN_FLD_POID, 0, ebufp );
         items_flistp = PIN_FLIST_CREATE(ebufp);
         database = PIN_POID_GET_DB(bi_pdp);
         s_pdp = PIN_POID_CREATE(database, "/search", -1, ebufp);
@@ -186,7 +193,9 @@ fm_get_meta_field(
          *********************************************************/
 
         flistp = PIN_FLIST_ELEM_ADD(items_flistp, PIN_FLD_ARGS, 1, ebufp);
-        PIN_FLIST_FLD_SET(flistp, PIN_FLD_CLASS_NAME, (void *)"ASSOGSM", ebufp);
+        
+
+	PIN_FLIST_FLD_SET(flistp, PIN_FLD_CLASS_NAME, (void *)"ASSOGSM", ebufp);
 
       
         /*********************************************************
@@ -203,3 +212,4 @@ fm_get_meta_field(
 	PIN_ERR_LOG_FLIST(PIN_ERR_LEVEL_DEBUG, "op_get_meta_field search flistp", *out_flistpp);     
  
   }
+	}
